@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Document</title>
+</head>
+<body>
+	
+	<!--
+		1-Bir degisiklik yaptim ve o esnada benim projee yapilan arkadasimin yaptigi degisiklikleri hizli bir sekilde pull ederek bir noktayi gormem gerekti ama o ana kadar yaptigim degisikliler henuz hazir degildi ve uzerinde duzenlemeler yaptiktan sonra ben onlari push etmek istiyordum yani o an icin push etmek istemiyorum...PEKI BU DURUMDA BENIM BIR SUREDEN BERI YAPTGIM DEGISIKLIKLERI PUSH ETMEDEN NASIL KORUYABILIRIM VE DAHA SONRA BUNLARI NASIL KULLANABILIRIM?
+		2-TAKIM ARKADASIMIN YAPTIGI DEGISIKLIKLER VE BENIM DEGISIKLIKLERIM ARASINDA CAKISMALAR OLDU VE BEN MERGE YAPTIM AMA MERGE U YANLIS YAPTIGIMI FARKETTIM VE TABI MERGE YAPTIKTAN SONRA GIT ADD- GIT COMMIT - GIT PUSH YAPIYORDUK VE BENDE BIR ONCEKI GIT COMMIT DEGISIKLIKLERIMI SON HALI OLARAK ALAMK ISTIYHORUM NASIL YAPARIM BUNU?
+
+		3-Yeni degisiklikler yaptim ama bu degisiklikerim icin yeni commit olusturmak  yerine bunu bir onceki yaptgim commitlerden birine dahil etmek istiyorum bunu nasil yaparim	..YANI BIZ BIR ONCEKI COMMIT TE YAPTIGIMZ BIR NOKTA YI DUZELTIP AYNI COMMIT MESSAJI AYNI COMMIT ICINDE BUNU GONDERMEK ISTIYORUZ MESELA O ZAMAN NASIL YAPACAGIZ...YANI HER UNUTTUGUMUZ EN UFAK BIR SEYDE YENI BIR COMMIT YAZMAK YERINE ORNEGIN AZ ONCE YAPTIGIMZ COMMIT TE BIRSEYLERI HATALI YAZDIGMIIZI VEYA EKSIK YAZIDGIMIZ I FARKETTIK HEMEN SONRASINDA  VE ISTIYORUZ KI SIMDI EKLEMEK ISTEDIKLERIMIZI EKLEYEELIM VE BUNLARI DA AZ ONCE GONDERDIGMZ COMMIT E DAHIL EDELIM...
+
+		4-YENI BIR LISTE EKLEDIM DEGISIKLIKLERE VE GIT ADD VE GIT COMMIT YAPTIM AMA SONRADAN FARKETTIM KI YANLIS SEYI COMMIT YAPMISIM NASIL EN SON COMMIT IMI GERI ALIRIZ VEYA EN SON YAPTIGMZ COMMIT I SILERIM...
+
+
+
+			1-git init
+		git init yaparak henuz herhangi bir git baglantisi olmayan dosyamiza git baglantisi olustururz ve 
+		ls -a veya ls -al dersek de gizli dosya olarak .git klasorunun olustugunu ve onun icerisinde bir cok dosyanin geldigni gorebilirz ki bu iste bizim git baglantimzin olustugunu gostermektedir
+		Iste bizim  yaptigmiz tum degisiklikler burda git in databas i icerisinde tutulmaktadir
+		ozellikle .git/config icerisinde biz uzak bir repo baglantisi vs olunca ordan gorebiliriz
+
+		Bu arada suna da dikkat edelim biz su an master branch i icerisindeyiz
+
+		2-git status
+		diyerek hangi dosyalarin degisiklik yapildigi ve git add ve git commit -m "" yapiladigindan henuz takip edilmedigini soyleyerek ve son durum ile ilgili bize durumu bildirir
+
+		3- git add - git commit -m "master1 | add title"
+			
+		4- git log 
+			ile biz yukardan asagi dogru..EN GUNCEL DEN ESKIYE DOGRU SIRALANAN COMMIT MESAJLARI VE COMMIT ID-HASH NUMARALARI LISTELER BU COK ONEMLIDIR BUNUNLA COK ISIMIZ OLACAK
+
+			ae_netsense.no@ADEM850 MINGW64 ~/utv/test/git-works (master)
+			$ git log
+			commit ff74cc0bf519a3525923dadbbc9dbb4e2d0deab3 (HEAD -> master)
+			Author: Adem Erbas <ae@netsense.no>
+			Date:   Mon Jun 26 23:58:41 2023 +0200
+
+				Master2 | add explanation
+
+			commit 41307bb4f5e42cee4770af7c58c488aa4d4473e4
+			Author: Adem Erbas <ae@netsense.no>
+			Date:   Mon Jun 26 23:54:12 2023 +0200
+
+				index.html
+
+			commit 9cc70eb332ba3fe8233fba1570b414a3dd65ba1e
+			Author: Adem Erbas <ae@netsense.no>
+			Date:   Mon Jun 26 23:51:42 2023 +0200
+
+				master1 | add title
+
+			5- Yeni degisiklikler yaptim ama bu degisiklikerim icin yeni commit olusturmak  yerine bunu bir onceki yaptgim commitlerden birine dahil etmek istiyorum bunu nasil yaparim
+			YANI HER UNUTTUGUMUZ EN UFAK BIR SEYDE YENI BIR COMMIT YAZMAK YERINE ORNEGIN AZ ONCE YAPTIGIMZ COMMIT TE BIRSEYLERI HATALI YAZDIGMIIZI VEYA EKSIK YAZIDGIMIZ I FARKETTIK HEMEN SONRASINDA  VE ISTIYORUZ KI SIMDI EKLEMEK ISTEDIKLERIMIZI EKLEYEELIM VE BUNLARI DA AZ ONCE GONDERDIGMZ COMMIT E DAHIL EDELIM...
+			
+			git add .
+			git commit --amend 
+			vim editorunde eklemek istediklerimiz ve commit mesajinda degisiklik yapmak istersek yapabiliyoruz 
+			ve cikmak icin ise 
+			YANI SON COMMIT MESAJINI DEGISTIREREK TEKRAR KAYDEDEBILIYORUZ
+			
+			BURDA VIM EDITORUNDE ACILIR SOM COMMIT MESAJIMZ VE ORDA BIZIM SUNLARI BILMEMIZ GEREKIR
+
+			1. Press "i" to enter insert mode.
+			2. Modify the commit message.
+			3. Press "Esc" to exit insert mode.
+			4. Type `:wq` and press "Enter" to save and exit Vim.
+
+			CTRL-C :qa! ENTER A BASARIZ BOYLE YAPARSAK HICBIR DEGISIKLIK YAPMADAN CIKAR VEYA YAPTGIMIZ COMMIT MESSAGE DEGISIKLIKLERINI  YANSITMADAN CIKAR YANI COMMIT MESAJINI DEGISTIRMEDEN SADECE DEGISIKLIKLERIMIZI AYNI COMMMIT E EKLEYEREK DE BU SEKILDE CIKABILIRIZ
+			:q! y aparak da direk cikabiliriz hicbir degisiklik  yapmadan
+
+			BU HARIKA BIR ISLEM...EN SON YAPTGIMIZ DEGISIKLIKLERI DE EN SON COMMIT ICERISINE DAHIL EDIP O COMMIT IN DE MESAJINI ISTEDIGMIZ GIBI DEGISTIREBILIYORUZ
+
+			HEM EN SON COMMIT BASLIGINI HEM DE EN SON EKLENEN DEGISIKLIGI SON COMMIT E EKLEMEK ICIN DAHA KISA SU SEKILDE YAPARIZ
+			ae_netsense.no@ADEM850 MINGW64 ~/utv/test/git-works (master)
+			$ git add .
+
+			ae_netsense.no@ADEM850 MINGW64 ~/utv/test/git-works (master)
+			$ git commit --amend -m "add my new features"
+
+			EN SON YAPILAN DEGISIKLIGI AYNI BASLIGA EKLEMEK ICIN ISE
+			git add .
+			git commit --amend 
+			:q! yaparak da direk cikabiliriz hicbir degisiklik  yapmadan
+
+			ya da SADECE EN SON YAPILAN COMMIT BASLGII DEGISTIRMEK ISTERSEK DE ASAGIDAKI GIBI YAPARIZ
+
+			ae_netsense.no@ADEM850 MINGW64 ~/utv/test/git-works (master)
+			$ git commit --amend -m "add my new features and changes"
+
+
+
+			6-
+			BIR ONCEKI COMMIT E GERI DONMEK! EN SON YAPILAN COMMIT I SILMEK...
+			YENI BIR LISTE EKLEDIM DEGISIKLIKLERE VE GIT ADD VE GIT COMMIT YAPTIM AMA SONRADAN FARKETTIM KI YANLIS SEYI COMMIT YAPMISIM NASIL EN SON COMMIT IMI GERI ALIRIZ VEYA EN SON YAPTIGMZ COMMIT I SILERIM...
+			ae_netsense.no@ADEM850 MINGW64 ~/utv/test/git-works (master)
+			$ git add .
+
+			ae_netsense.no@ADEM850 MINGW64 ~/utv/test/git-works (master)
+			$ git commit -m "Master3 | add new lists"
+			[master fa04328] Master3 | add new lists
+			1 file changed, 5 insertions(+)
+
+			git revert commitHASHID(FIRST 7 DIGIT)(HANGI HASH ID COMMIT I GERI ALINACAK ISE ONU VERIRIZ)
+
+			COMMITLERIMIZIN HASH ID LERINI git log  yaparak gorebiliyoruz
+			git log
+
+			ae_netsense.no@ADEM850 MINGW64 ~/utv/test/git-works (master)
+			$ git log
+			commit fa043285798a6d1352a204ef9e91ceb41a392c35 (HEAD -> master)
+			Author: Adem Erbas <ae@netsense.no>
+			Date:   Tue Jun 27 00:49:55 2023 +0200
+
+			Master3 | add new lists
+
+			commit b0867ea6b77c29bb0645e614d91ddac9f19e557c
+			Author: Adem Erbas <ae@netsense.no>
+			Date:   Mon Jun 26 23:58:41 2023 +0200
+
+			add my new features and changes
+
+			commit 41307bb4f5e42cee4770af7c58c488aa4d4473e4
+			Author: Adem Erbas <ae@netsense.no>
+			Date:   Mon Jun 26 23:54:12 2023 +0200
+
+				index.html
+
+			commit 9cc70eb332ba3fe8233fba1570b414a3dd65ba1e
+			Author: Adem Erbas <ae@netsense.no>
+			Date:   Mon Jun 26 23:51:42 2023 +0200
+
+				master1 | add title
+
+			EN YUKARDAN 1. SIRADAKINI GETIRMESINI ISTERSEK DE ASAGIDAKI GIBI YAPARIZ	
+			$ git log -n 1
+			commit fa043285798a6d1352a204ef9e91ceb41a392c35 (HEAD -> master)
+			Author: Adem Erbas <ae@netsense.no>
+			Date:   Tue Jun 27 00:49:55 2023 +0200
+
+			Master3 | add new lists		
+
+			$ git log -n 1 EN YUKARDAN 1 TANESINI GETIR
+			$ git log -n 2 EN YUKARDAN YANI YUKARDAN ASAGI DOGRU 2 TANESINI GETIR
+			$ git log -n 1 EN YUKARDAN YANI YUKARDAN ASAGI DOGRU 3 TANESINI GETIR
+
+			ae_netsense.no@ADEM850 MINGW64 ~/utv/test/git-works (master)
+			$ git revert fa043285798a6d  (bu hashid sini verdgimz commit numarasini geri aliyor ama ne yaparak geri aliyor bunu yaparken de yeni bir commit atayarak yapiyor bunu yani bizim tekrar geri donebilme sanzimiz oluyor) ve bize vim editorunde bizim revert yapmak istedigmz commit mesajini degistirerek kaydedebiliyoruz ve o zaman geri alma imkani snuyor bize..
+
+			1. Press "i" to enter insert mode.
+			2. Modify the commit message.
+			3. Press "Esc" to exit insert mode.
+			4. Type `:wq` and press "Enter" to save and exit Vim.
+
+			veya :q! ile direk cikabiliyoruz commit mesajinda herhangi bir degisiklik yapmadan
+
+			7- GIT REVERTH HASNUMBER OF COMMIT ILE EN SON COMMIT I YENI BIR COMMIT OLUSTURARAK SILIYORDU AMA TAMAMEN SILMIYOR O HALA GIT LOG DA BULUNYOR..ISTE BIZ REVERTH IN REVERT INI YAPMAK ISTERSEK YANI EN SON COMMIT I SILEREK YENI BIR COMMIT OLUSTURARAK GELMISTI BIZDE TEKRARDAN BIR REVERT DAHA YAPARAK EN SON YAPTGIMZ DEGSIKLIIGI SILEN REVERT-COMMIT I GERI ALIRSAK EN SON YAPTIGMIZ DEGISIKLIGI GERI ALABILMIS OLURUZ.
+
+
+			commit e42fa9c4c1a94940ddccbdc4ee3809c8025e52e9 (HEAD -> master)
+			Author: Adem Erbas <ae@netsense.no>
+			Date:   Tue Jun 27 00:58:15 2023 +0200
+
+				Revert "Master3 | remove new lists"
+
+				This reverts commit fa043285798a6d1352a204ef9e91ceb41a392c35.
+
+			ae_netsense.no@ADEM850 MINGW64 ~/utv/test/git-works (master)
+			$ git revert e42fa9c4c1a9494
+
+
+			1. Press "i" to enter insert mode.
+			2. Modify the commit message.
+			3. Press "Esc" to exit insert mode.
+			4. Type `:wq` and press "Enter" to save and exit Vim.
+
+			ae_netsense.no@ADEM850 MINGW64 ~/utv/test/git-works (master)
+			$ git log
+			commit 24d01f87b350c0d38bac0e357c2dd07379ea86b5 (HEAD -> master)
+			Author: Adem Erbas <ae@netsense.no>
+			Date:   Tue Jun 27 01:08:24 2023 +0200
+
+				Revert "Revert "Master3 | undo new lists""
+
+				This reverts commit e42fa9c4c1a94940ddccbdc4ee3809c8025e52e9.
+
+			commit e42fa9c4c1a94940ddccbdc4ee3809c8025e52e9
+			Author: Adem Erbas <ae@netsense.no>
+			Date:   Tue Jun 27 00:58:15 2023 +0200
+
+				Revert "Master3 | remove new lists"
+
+				This reverts commit fa043285798a6d1352a204ef9e91ceb41a392c35.
+
+			commit fa043285798a6d1352a204ef9e91ceb41a392c35
+			Author: Adem Erbas <ae@netsense.no>
+			Date:   Tue Jun 27 00:49:55 2023 +0200
+
+				Master3 | add new lists
+
+			GIT RESET --HARD COMMIT-HASH-ID
+			(VERDIGIMIZ ID YI HEAD YAPARAK ONDAN ONU EN SON COMMIT YAPAR..ONUN USTUNDE BULUNAN COMMITLERIN HEPSI KALICI OLARAK SILINMIS OLUR..)
+
+			GIT REVERT ILE GIT HISTORY YE EKLEYEREK YENI COMMIT ALARAK GERI ALIYORDU...PEKI BIZ GIT REVERT KULLANMADAN GERI ALMAK ISTIYORSAK O ZAMAN NE YAPARIZ....GIT RESET --HARD KULLANIRIZ KI BU GERI DONUSU OLMAYACAK SEKILDE SILER BU BAZEN COK TEHLIKELI OLABILIR BIZIM ICIN... 
+			
+			ae_netsense.no@ADEM850 MINGW64 ~/utv/test/git-works (master)
+			$ git log -n 3  
+			commit 24d01f87b350c0d38bac0e357c2dd07379ea86b5 (HEAD -> master)
+			Author: Adem Erbas <ae@netsense.no>
+			Date:   Tue Jun 27 01:08:24 2023 +0200
+
+			Revert "Revert "Master3 | undo new lists""
+
+			This reverts commit e42fa9c4c1a94940ddccbdc4ee3809c8025e52e9.
+
+			commit e42fa9c4c1a94940ddccbdc4ee3809c8025e52e9
+			Author: Adem Erbas <ae@netsense.no>
+			Date:   Tue Jun 27 00:58:15 2023 +0200
+
+			Revert "Master3 | remove new lists"
+
+			This reverts commit fa043285798a6d1352a204ef9e91ceb41a392c35.
+
+			commit fa043285798a6d1352a204ef9e91ceb41a392c35
+			Author: Adem Erbas <ae@netsense.no>
+			Date:   Tue Jun 27 00:49:55 2023 +0200
+
+			Master3 | add new lists
+
+			ae_netsense.no@ADEM850 MINGW64 ~/utv/test/git-works (master)
+			$ git reset --hard fa043285798a6d  (Master3 | add new lists) E KADAR OLAN COMMIT LERI SILER VE BU COMMIT I HEAD YANI EN SON COMMIT YAPAR...AMA GERI DONUSU OLMAYACAK SEKILDE SILER... 
+			HEAD is now at fa04328 Master3 | add new lists
+
+			$ git log
+
+			commit fa043285798a6d1352a204ef9e91ceb41a392c35 (HEAD -> master)
+			Author: Adem Erbas <ae@netsense.no>
+			Date:   Tue Jun 27 00:49:55 2023 +0200
+
+			Master3 | add new lists
+
+			commit b0867ea6b77c29bb0645e614d91ddac9f19e557c
+			Author: Adem Erbas <ae@netsense.no>
+			Date:   Mon Jun 26 23:58:41 2023 +0200
+
+			add my new features and changes
+
+			commit 41307bb4f5e42cee4770af7c58c488aa4d4473e4
+			Author: Adem Erbas <ae@netsense.no>
+			Date:   Mon Jun 26 23:54:12 2023 +0200
+
+			index.html
+
+			GIT REVERT IN FARKLI COMMIT LERE GORE VERDIGI TEPKILER
+
+			1-git revert fa043285798a6d eger bu hash-id si en son commit numarasi ise onu sorunsuz bir sekilde bir geri alarak ondan onceki commit hangisi ise onun degisiklilerini gorecegiz artik 
+			2- git revert ile geriye dogru biz hangi commit e uygularsak o uyguladigmz commit i geriye aliyor yani o uygulana commit i silip ondan bir once hangi commit var ise ondaki degisiklilkleri bize getiriyor...
+			git log --oneline -n 10  ile biz her bir log u tek satirda min 7 haneli hash-id numaralri ile siralayabiliriz..
+			
+
+			GIT RESET --HARD COMMIT-HASH-ID
+			(VERDIGIMIZ ID YI HEAD YAPARAK ONDAN ONU EN SON COMMIT YAPAR..ONUN USTUNDE BULUNAN COMMITLERIN HEPSI KALICI OLARAK SILINMIS OLUR..)
+			GIT RESET IN REVERT TEN BIR FARKLI DA BIZ GIT-RESET TE HANGI HASH ID YI VERIRSEK O ID YI HEAD MASTER COMMIT YAPIYOR YANI O VERDIGMZ HASH ID YI DEGIL ONDAN ONCEKILERI SILIYOR YANI O HASH ID DEN ONCE KAC TANE COMMIT VARSE GERI DONMEYECEK SEKILDE SILIYOR....	
+
+			YANI GIT REVERT -HASHIDNUMBER- BU COMMIT HANGISI ISE BU COMMITTI SILIP HEMEN ONCEKI COMMITI BIZE HEAD  YAPIYOR ONU BIZE GETIRIYOR..
+			AMA GIT HARD HASH-COMMIT-ID ISE BU COMMIT HANGISI ISE O COMMIT I SILMIYOR BU COMMMITI BIZE HEAD OLARAK YANI BIZE BU COMMIT IN DEGISIKLIKLERINI GETIRIYOR
+	-->
+</body>
+</html>
