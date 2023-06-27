@@ -1,7 +1,7 @@
-# Adem-new-commit-1
+# Zehra-new-commit-1
 
-# Adem-new-commit-2
+# Zehra-new-commit-2
 
-# Adem-new-commit-3
+# Zehra-new-commit-3
 
-# Adem-commit-4
+# Zehra-commit-4
