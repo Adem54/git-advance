@@ -297,7 +297,8 @@
 			CONFLICT (content): Merge conflict in index2.md
 			Automatic merge failed; fix conflicts and then commit the result.
 
-			MERGE YAPTIKTAN SONRA GIT ADD - GIT COMMIT YAPARIZ VE SON LOG U YAZDIRIRIZ 
+			MERGE YAPTIKTAN SONRA EGER GIT ADD- GIT COMMIT YAPMAMIS ISEK O ZAMAN BIZ GIT RESET --HARD ILE EN SON COMMIT I TEKRAR HEAD YAP DIYEREK SONRA BIR DAHA GIT PULL DERSEK UZAK REPODAN TEKRARDAN CAKISAN KODLARI CEKECEKTIR.....
+			AMA COK DIKKAT EGER MERGE DEN SONRA GIT ADD VE GIT COMMIT YAPILMAMIS ISE...
 
 			ae_netsense.no@ADEM850 MINGW64 ~/utv/test/git-advance (main|MERGING)
 			$ git log --oneline -n 6
@@ -326,6 +327,43 @@
 
 			ae_netsense.no@ADEM850 MINGW64 ~/utv/test/git-advance (main|MERGING)
 			$
+
+			AMA SU PROBLEMI HALA COZEMEDIK EGER BEN MERGE ISLEMINI YAPTIM VE MERGE ISLEMINDEN SONRA GIT ADD - GIT COMMIT -M ILE MESAJ YAZDIM VE SONRA DA YANLIS BIR MERGE YAPTIGIMIZI FARKETTIK NASIL UZAK REPODAN AYNI KODLARI TEKRAR ALARAK MERGE ISLEMINI BASTAN YAPARIZ.....BUNUN UZERINE DUSUNELIMM...
+
+			GIT COMMITLER ARASINDAKI FARKLILIKLARI NASIL GORURUZ...COOOK ONEMLI BU YINE VE COOK FAZLA KULLANACAGIMZ BIR OZELLIK...
+			GIT DIFF COMMIT-ID-1 COMMIT-ID-2 DOSYA-ISMI(INDEX3.MD)
+
+			$ git log --oneline -n 10
+			1f54300 (HEAD -> main) Revert "merged | accept all from localll--!"
+			36b6dca (origin/main) merged | accept all from local
+			b849981 changed-local
+			27022a9 Update index3.md
+			784dfe7 git-commit-4
+			b2a795e git-commit-3
+			519f27d git-commit-2
+			65e352a git-commit-1
+			4f6a016 corrected-merging
+
+
+			ae_netsense.no@ADEM850 MINGW64 ~/utv/test/git-advance (main|REVERTING)
+			$ git diff 784dfe7 b2a795e index3.md - (YANI GIT-COMMIT-4 ILE GIT-COMMIT-3 ARASINDAKI FARKI BIZE GOSTER DIYORUZ)
+			diff --git a/index3.md b/index3.md
+			index 9e4c007..3a95101 100644
+			--- a/index3.md
+			+++ b/index3.md
+			@@ -2,6 +2,4 @@
+
+			# git-commit-2
+
+			-# git-commit-3
+			-
+			-# git-commit-4
+			\ No newline at end of file
+			+# git-commit-3
+			\ No newline at end of file
+
+			DOSYA YAZMADAN VERIRSEK EGER DE O ZAMAN VAR OLAN BRANCH TE YAPILMIS OLAN FARKLILIKLARI GOSTERECEKTI
+
 	-->
 </body>
 </html>
