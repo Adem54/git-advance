@@ -271,6 +271,61 @@
 			SIMDI GELELIM..PROBLEMLERIMIZDEN BIRININ COZUMUNE!!!!! 
 			ORNEGIN BIZ BELLI DEGISIKLIKLER  YAPTIK GIT ADD- GIT COMMIT YAPTIK SONRA GIT PULL YAPTIK VE TAKIM ARKADASIMIZ ILE AYNI SATIRLARDA YAPTGIMIZ DEGISIKLILERDEN DOLAYI MERGE YAPMAMIZ GEREKTI VE MERGE YAPTIK SONRA GIT ADD VE GIT COMMIT  YAPMAK GEREKIYOR TEKRAR VE TAM GIT PUSH YAPACAKKKEN FARKETTIK KI GIT MERGE U YANLIS YAPMISIZ...O ZAMAN NE YAPACAGIZ EVET BOYLE DURUMLARDA 
 			1-ONCE LIKLE GIT REVERT ILE EN SON  YAPILAN DEGISIKLIKLIGI BIR GERI ALIRIZ ONCE YANI MERGE DEGISIKLIGIINI GERI ALIRIZ
+
+			BU PROBLEMIN COZUMU BU SEKILDE GERCEKLESIYOR....COOK ONEMLI BESTPRACTISE... 
+
+			ONCE LOKALDEKI DEGISIKLIGIIMZI GIT-ADD-GIT COMMIT YAPARIZ
+			ae_netsense.no@ADEM850 MINGW64 ~/utv/test/git-advance (main)
+			$ git add .
+
+			ae_netsense.no@ADEM850 MINGW64 ~/utv/test/git-advance (main)
+			$ git commit -m "local-changings"
+			[main 58dcf90] local-changings
+			1 file changed, 4 insertions(+), 4 deletions(-)
+
+			SONRA GIT PULLL YAPARIZ VE GIT MERGE YAPMAMIZ GEREKIR...CAKISAN DEGISIKLIKLERDEN DOLAYI
+			ae_netsense.no@ADEM850 MINGW64 ~/utv/test/git-advance (main)
+			$ git pull
+			remote: Enumerating objects: 5, done.
+			remote: Counting objects: 100% (5/5), done.
+			remote: Compressing objects: 100% (3/3), done.
+			remote: Total 3 (delta 1), reused 0 (delta 0), pack-reused 0
+			Unpacking objects: 100% (3/3), 664 bytes | 24.00 KiB/s, done.
+			From https://github.com/Adem54/git-advance
+				fb6241c..16ca157  main       -> origin/main
+			Auto-merging index2.md
+			CONFLICT (content): Merge conflict in index2.md
+			Automatic merge failed; fix conflicts and then commit the result.
+
+			MERGE YAPTIKTAN SONRA GIT ADD - GIT COMMIT YAPARIZ VE SON LOG U YAZDIRIRIZ 
+
+			ae_netsense.no@ADEM850 MINGW64 ~/utv/test/git-advance (main|MERGING)
+			$ git log --oneline -n 6
+			58dcf90 (HEAD -> main) local-changings
+			fb6241c commit-test-4
+			28ed1f7 commit-test-3
+			5302ac0 commit-test-2
+			cce07e3 commit-test-1
+			9cf8253 Update index.md
+		
+
+			VE BIRDEN MERGE U YANLIS YAPTIGIMZI FARKEDERIZ VE DAHA SONRA DA EN SON YAPTGIMZ GIT-COMMMIT I GIT RESET --HARD EN-SON-COMMIT-HASH-ID SINI VEREREK EN SON COMMIT IMIZI HEAD YAPARIZ ZATEN HEAD IDI AMA YINE HEAD YAPARIZ...
+			
+
+			ae_netsense.no@ADEM850 MINGW64 ~/utv/test/git-advance (main|MERGING)
+			$ git reset --hard 58dcf90
+			HEAD is now at 58dcf90 local-changings
+
+			EN SON COMMIT IMIZI GIT RESET --HARD 58dcf90 YAPTIKTAN SONRA  ARTIK GIT PULL YAPARSAK BIR KEZ DAHA UZAK REPO DA KI DEGISIKLIKLERI BIZE GETIRECEKTIR...COOOK ONEMLI...VE BIZE HATA YAPTGIMIZ MERGE ISLEMINI BIR KEZ DAHA YAPMA IMKANI SUNMUS OLUYYOR.....
+
+			ae_netsense.no@ADEM850 MINGW64 ~/utv/test/git-advance (main)
+			$ git pull
+			Auto-merging index2.md
+			CONFLICT (content): Merge conflict in index2.md
+			Automatic merge failed; fix conflicts and then commit the result.
+
+			ae_netsense.no@ADEM850 MINGW64 ~/utv/test/git-advance (main|MERGING)
+			$
 	-->
 </body>
 </html>
