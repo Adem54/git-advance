@@ -1,7 +1,7 @@
-# new-commit-1
+# my-new-commit-1
 
-# new-commit-2
+# my-new-commit-2
 
-# new-commit-3
+# my-new-commit-3
 
-# new-commit-4
+# my-new-commit-4
