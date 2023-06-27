@@ -10,3 +10,6 @@
 - Hey this is my new git commit
 - And I make testing to understand git functionality
 
+# my-git-commit-6
+-Hey this is the my-git-commit-6
+- What do you expect from this tutor?
