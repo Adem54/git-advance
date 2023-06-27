@@ -1,7 +1,7 @@
-# new-git-commit-1
+# my-git-commit-1
 
-# new-git-commit-2
+# my-git-commit-2
 
-# new-git-commit-3
+# my-git-commit-3
 
-# new-git-commit-4
+# my-git-commit-4
