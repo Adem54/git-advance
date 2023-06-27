@@ -1,7 +1,7 @@
-# your-new-commit-1
+# Adem-new-commit-1
 
-# new-commit-2
+# Adem-new-commit-2
 
-# your-new-commit-3
+# Adem-new-commit-3
 
-# new-commit-4
+# Adem-commit-4
