@@ -1,7 +1,7 @@
-# his-new-commit-1
+# new-commit-1
 
-# his-new-commit-2
+# new-commit-2
 
-# his-new-commit-3
+# new-commit-3
 
-# his-new-commit-4
+# new-commit-4
