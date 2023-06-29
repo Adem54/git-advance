@@ -364,6 +364,275 @@
 
 			DOSYA YAZMADAN VERIRSEK EGER DE O ZAMAN VAR OLAN BRANCH TE YAPILMIS OLAN FARKLILIKLARI GOSTERECEKTI
 
+			# my-git-commit-5
+			- Hey this is my new git commit
+			- And I make testing to understand git functionality
+
+			# my-git-commit-6
+			-Hey this is the my-git-commit-6
+			- What do you expect from this tutor?
+
+			yukardaki commit-5 ve commit-6 yi ekledik ve her birisi icin ayri ayri commit mesajlarini yazdik
+
+			ae_netsense.no@ADEM850 MINGW64 ~/utv/test/git-advance (main)
+			$ git log --oneline -n 10
+			dc394b3 (HEAD -> main) my-git-commit-6
+			aeef8fb my-git-commit-5
+			
+
+			ae_netsense.no@ADEM850 MINGW64 ~/utv/test/git-advance (main)
+			$ git diff dc394b3 aeef8fb 
+			$ git diff dc394b3(my-git-commit-6) aeef8fb(my-git-commit-5) 
+
+			diff --git a/index3.md b/index3.md
+			index 9af4104..38fd3ea 100644
+			--- a/index3.md - my-git-commit-6 ilk verdigimz..cunku burda yazidgimz cikarilarak farki gosterielcek ondan dolayi a olarak bu commit i referans ediyor
+			+++ b/index3.md  b olarak da my-git-commit-5 commiti referans ediyor
+			@@ -10,6 +10,3 @@
+			- Hey this is my new git commit
+			- And I make testing to understand git functionality
+
+			-# my-git-commit-6(NELER CIKARILMIS ONU GOSTERIYOR)
+			--Hey this is the my-git-commit-6
+			-- What do you expect from this tutor?
+
+			GIT DIFF ISLEMIN VISUAL STUDIO CODE DA GIT EKLENTIS I UZERINDEN COMMIT SLERE GIDIP COMMIT BASLIKLARI ALTINDAKI DOSYA YA TIKLAYARAK DA O COMMIT ILE NELER YENI OLARAK EKLENDIGINI GOREBILIOYRUZ BU HARIKA BIR OZELLIK VE COOOOK FAZLA KULLANIP COK FAZLA ISIMIZE YARYACAK BIR OZELLIKTIR...
+
+			BRANCH ISLEMLERI
+
+			Bir proje uzerinde takim arkadaslari ile projenin farkli bolumlerini eger birlikte  yapiyorsak, master tum projede calistgimz ortak branchimiz olacaktir..HATTA once ortak bir dev isminde branch acilir..sonra da herkes hangi alan uzeridne calisacak ise o alan a gore isimler verilerek herkes kendi branchini olusturur ve kendi branchi uzerinde calisir...ARDINDAN DA HERKES KENDI BRANCHINDEKI ISINI BITIRDIKTEN SONRA DEV BRANCI UZERINDE BIRLESTIRILIR VE SON OLARAK DA ARTIK PRODUCTION MASTER BRANCHA AKTARILACAKTIR....
+
+			git branch header- header isminde branch olusturur
+			git branch var olan mevcut branchlari listeler
+			 header
+			 master
+			o anda hangi branch te oldugumuzu komut satirindan anlayabiliriz zaten
+
+
+			ae_netsense.no@ADEM850 MINGW64 ~/utv/test/git-works (master)  master branhc
+			header branchimiza gecis yapmak icin ise 
+			git checkout header
+
+			ae_netsense.no@ADEM850 MINGW64 ~/utv/test/git-works (master)
+			$ git checkout header
+			Switched to branch 'header'
+
+			ae_netsense.no@ADEM850 MINGW64 ~/utv/test/git-works (header)
+
+			Peki branch i olusturdugu anda o branche gecis yapmasini istersek 
+			git checkout -b footer
+
+			Peki yanlislikla olusturdugmuz bir branchi silmek icin ne yapariz
+
+			DIIKKAT!! O AN UZERINDE OLDUGMUZ BRANCHI SILEMEYIZ!!!!
+			ae_netsense.no@ADEM850 MINGW64 ~/utv/test/git-works (footer)
+			$ git branch -D footer
+			error: Cannot delete branch 'footer' checked out at 'C:/Users/ae_netsense.no/utv/test/git-works'
+
+			
+			ONCE FOOTER BRANCHINDEN MASTER BRANCHINE GECIS YAPARIZ!
+			ae_netsense.no@ADEM850 MINGW64 ~/utv/test/git-works (footer)
+			$ git checkout master
+			Switched to branch 'master'
+
+			ae_netsense.no@ADEM850 MINGW64 ~/utv/test/git-works (master)
+			$ git branch -D footer
+			Deleted branch footer (was 00eb90e).
+
+			ae_netsense.no@ADEM850 MINGW64 ~/utv/test/git-works (master)
+			$ git branch
+			header
+			* master
+
+			Biz header branchine gecis yapariz tekrardan 
+			git checkout header
+
+			Ardindan ise header.md dosyasini eklyerek icerisine # Header title is added  gibi birsey yazariz ve de index2.html dosyaisnda header bolumu acarak orda da h2 icersine my header section yazariz bunlar add, commit  yaparz...DAHA sonra eger git checkout master dersek, artik header.md ve index2.html icinde header kisminda, header branchinda iken ekledikleirmzi goremeyiz tabi ki...
+
+			SIMDI SUNU DA IYI ANLAYALIM...BIZ YENI BIR BRANCH OLUSTURURKEN O BRANCHI OLUSTURURKEN O AN DA HANGI BRANCH UZERINDE BU ISLEM YAPILIYOR ISE O BRANCH I REFERANS ALARAK OLUSTURUR!!!!
+
+			BURAYA DIKKAT EDELIM!!!
+			ae_netsense.no@ADEM850 MINGW64 ~/utv/test/git-works (footer)
+			$ git checkout header
+			error: Your local changes to the following files would be overwritten by checkout:
+					index2.html
+			Please commit your changes or stash them before you switch branches.
+			Aborting
+
+			COOOOK ONEMLI...CALISTGIMIZ BRANCH UZERINDE HERHANGI BIR DEGISIKLIK  YAPMIS ISEK ONU MUTLAKA GIT ADD- GIT COMMIT YAPARAK HEMEN COMMIT OLUSTRMALIUYZ....EGER OLUSTURMAZ ISEK ve de ORNEGIN HEADER BRANCHINDA DEGISIKLIKLER YAPTIKTAN SONRA GIT-ADD VE COMMIT YAPMADAN MASTER BRANCINA GECERSEK YAPTIGIMZ TUM DEGISIKLIKLER GIT CHECKOUT ILE GECIS  YAPTIGIMZ MASTER BRANCHINDE DE GECERLI OLACAKTIR O DEGISIKLIKLERI MASTER BRANCH TE TE GORECEGIZ KI BU COK TEHLIKELIIDIR..ZATEN BRANCH OLUTURMA AMACINA TERSTIR...BIZ HERKES KENDI YAPTIGI ISI AYRI TUTSUN VE EN SON BIRLESTIRME YAPALIM MANTIGI ILE BU ISLEMI YAPIYORUZ...
+
+			AYRICA BIZ BIR BRANCHTE CALISIRKEN YENI OZELIK EKLEDIGIMZDE EGER GIT ADD VE COMMIT YAPMAMIS ISEK BZIM SADECE MASTER BRANCH E GECMEMIZE IZIN VERIYOR GIT ONUN DISINDA GIT-ADD VE COMMIT YAPMADAN DIGER BRANCHLERE DE GECIS YAPTIRMMIYOR UYARI VERIYOR
+
+			AYRICA ORNEGIN BIZ SIDEBAR ISMINDE BIR BRANCH OLUSTURDUK VE ORDA DEGISIKLIKLERI YAPTIK VE ARDINDAN O DEGISIKLILERI GIT ADD VE COMMMIT YAPMADAN MASTER BRANCHINE GECIS YAPTIK DEGISKLIKLERIMIZ MASTER BRANCHINDE DE GORURZ AMA DIKKAT EDELIM HALA GIT-ADD VE GIT COMMIT YAPMADIK VE DE EGER BIZ MASTER BRANCHINDEN TEKRAR SIDEBAR BRANCHINA GECEREK GIT ADD VE GIT COMMIT YAPARSAK TEKRARDAN YAPTGIMIZ DEGISKLIKLER SADECE SIDEBAR ICINDE GORULECEKTIR CUNKU SIDEBAR BRANCHI UZERINDE GIT-ADD VE GIT COMMMIT YAPMIS OLDUK
+
+			YENI BIR SENARYO..
+			ORNEGIN BRNCHLERIMIZI MERGE ETTIK VE PRODUCTION A KODLAR AKTARILDI...ARTINDAN BIZIM YAZDIGMIZ HEADER KISMINDA BAZI PROBLEMLER CIKTI AMA O ESNADA BIZ HEADER DA CALISMAYA DEVAM EDIYORDUK VE BIR COK  YENI OZELLIK EKLEDIK...AMA BIZIM PRODUCTION A AKTARILAN KISIMDAKI PROBLEMLERI COZMEMIZ DE GEREKIYOR..DOLAYISI ILE YENI OLUSTURDGUMUZ AMA HENUZ PUSH ETMEDIGJIMZ OZELLIKLER OLMADAN GORMEMIZ GEREKKIYOR PROJEYI ONDAN DOLAYI DA BIZ YENI OZELLIIKLERI LOKALDE BIR YERDE TUTUP BEKLETIP, O ESNADA BUG-HATA YI COZMEK ISTIYORUZ VE ARDINDAN HATA YI COZDUKTEN SONRA DA LOKAL DE TUTTUGMUZ  YENI OZELLIKL KODLARINI ALARAK KALDIGMIZ  YERDEN DEVAM ETMEK ISTIYORUZ!!!!
+			BUNU NASIL YAPARIZ ONA BAKALIM...
+
+			GIT STASH
+			EN SON YAPILAN COMMITTEN ITIBAREN YAPILAN TUM DEGISIKLIKLER STATSH DE SAKLANACAKTIR
+			BU VERI GECICI OLARAK SAKLANIR YANI BIR YERE KAYDEDILMEZ VEYA BIR YERE COMMIT OOLLRARAK TUTULMAZ 
+
+			ae_netsense.no@ADEM850 MINGW64 ~/utv/test/git-works (header)
+			$ git stash
+			Saved working directory and index state WIP on header: 43ca332 header 1 | header title added
+
+			Son komutumdan itibaren olan kodlari sakladigini gorebiliriz
+
+			stash listesini gorebilmek icin de 
+
+			ae_netsense.no@ADEM850 MINGW64 ~/utv/test/git-works (header)
+			$ git stash list
+			stash@{0}: WIP on header: 43ca332 header 1 | header title added
+			stash@{1}: WIP on header: 43ca332 header 1 | header title added
+
+			BURDA MANTIK SUDUR EN SON GIT STASHE EKLENEN HER ZAMAN 0 OLUR..YANI EN GUNCELDEN EN ESKIYE DOGRU 0-1 DIYE LISTELER
+
+			GIT STASH LISTESINI DE SILEBILRIZ EGER ISTERSEK
+			git stash clear
+
+			Peki tekrardan git stash deki kodlarimi nasil geri alabilirm nasil calitigmi branhime geri alirim
+
+			1- git stash pop ile en son stash yani stash@{0} i geri getiririz
+			ve en son stash leri geri getirince de dogal olarak git add ve git commit yapmammizi beklior git
+
+			git add . 
+			git commit -m "after stash"
+
+			$ git log --oneline -n 10
+			d975538 (HEAD -> header) after-stash
+			43ca332 header 1 | header title added
+			00eb90e new-project
+
+			ae_netsense.no@ADEM850 MINGW64 ~/utv/test/git-works (header)
+			$ git stash
+			Saved working directory and index state WIP on header: d975538 after-stash
+
+			ae_netsense.no@ADEM850 MINGW64 ~/utv/test/git-works (header)
+			$ git stash list
+			stash@{0}: WIP on header: d975538 after-stash
+			stash@{1}: WIP on header: 43ca332 header 1 | header title added
+
+			git stash pop yapinca gidip stash listesinini en ustundeki ni geri alir ve stash listesinden de o geri alinan stash@{0} i siler
+
+			Zaten bunu yaptginin biz git pop yaptigmizda git aciklama olarak da veriyor, asagida bir onceki stash yaptgimzda git in verdigi mesaji gorebiliriz
+
+			ae_netsense.no@ADEM850 MINGW64 ~/utv/test/git-works (header)
+			$ git stash pop
+			On branch header
+			Changes not staged for commit:
+			(use "git add <file>..." to update what will be committed)
+			(use "git restore <file>..." to discard changes in working directory)
+					modified:   header.md
+					modified:   index2.html
+
+			no changes added to commit (use "git add" and/or "git commit -a")
+			Dropped refs/stash@{0} (b92a73d72792b6d2f57b5985a0bd605800a1193b)
+
+		En son stashi degil de ondan onceki stashlerden birini biz geri almak istiyorsak ne yapariz ona bakalim!!
+
+		ae_netsense.no@ADEM850 MINGW64 ~/utv/test/git-works (header)
+		$ git stash apply stash@{1}  - Bu sekilde spesifik bir stash i geri alabiliriz
+		Auto-merging header.md
+		CONFLICT (content): Merge conflict in header.md
+		Auto-merging index2.html
+		CONFLICT (content): Merge conflict in index2.html
+		On branch header
+		Unmerged paths:
+		(use "git restore --staged <file>..." to unstage)
+		(use "git add <file>..." to mark resolution)
+				both modified:   header.md
+				both modified:   index2.html
+
+		no changes added to commit (use "git add" and/or "git commit -a")
+
+		ae_netsense.no@ADEM850 MINGW64 ~/utv/test/git-works (header)
+		$ git stash list
+		stash@{0}: WIP on header: d975538 after-stash
+		stash@{1}: WIP on header: 43ca332 header 1 | header title added
+
+		git stash pop da en ustteki en son stashi geri getirir ve onu stash listesinden silerdi ancak git stash apply stash@{1} ile bu islemi yaptigmzda, spesifik olarak hangi stashi verdi isek onu getirir ama getirdigmz ornegin statsh@{1} i stash listesinden simiyor bunu da bilelim...		
+
+		BRANCHLERIN MERGE EDILMESI
+
+		Oncelikle biz master branchine geliriz			
+		Master branch i uzerinde iken biz master branchi ile hangi branch i merge etmek istersek 
+		master-barnch/  git merge header  dersek master-header i master uzerinde merge edecektir. 
+
+		ae_netsense.no@ADEM850 MINGW64 ~/utv/test/git-works (master)
+		$ git merge header
+		Merge made by the 'ort' strategy.
+		header.md   |  8 ++++++++
+		index2.html | 11 ++++++++++-
+		2 files changed, 18 insertions(+), 1 deletion(-)
+		create mode 100644 header.md
+
+		merge islemini git su mantik ile yapiyor her iki branchin ortak commit ini buluyor ardindan her iki branchin som kommitine gidiyor
+		Bu ikisi arasindaki degisiklikleri uzerinde aktif oldugmuz branche uyguluyor
+		Ortak kommit ile son kommit arasindaki farklari uzerinde bulundugmuz, merge ederken uzdrinde bulundugmuz branch a uyguluyor
+
+		YALNIZ GIT MERGE ILE MERGE  YAPMAKTAKI SORUN SU KI BIZE SON BIR COMMIT YAPMA SANSI VERMIYOR DIREK KENDISI  YAPIYOR O ISLEMI VE BIZIM ORNEGIN MASTER UZERINDEN HEADER BRANCHINI BIRLESTIRGIMIZ ZAMAN BIZDEN BASKALARI BIZ HANGI KODLARI MASTER A MERGE ETIIGIMIZI GORMEK ISTERSE GOREMEZ...ONDAN DOOLAYI DA BIZ ISTIYORUZ KI BIRLESTIRELIM MERGE  YAPALIM AMA COMMIT I DE BIZ YAPALIM KI O BIZIM BIRLESTIRIRKEN HEADER DA HANGI KODLARI MASTER A EKLEDI ISEK ONLAR ICINDE AYRICA COMMIT YAPMA FIRSATI BULARAK KENDIMIZ COMMIT YAPALIM
+
+		ae_netsense.no@ADEM850 MINGW64 ~/utv/test/git-works (master)
+		$ git merge --squash footer
+		Auto-merging index2.html
+		Automatic merge went well; stopped before committing as requested
+		Squash commit -- not updating HEAD
+
+		ae_netsense.no@ADEM850 MINGW64 ~/utv/test/git-works (master)
+		$ git add .
+
+		ae_netsense.no@ADEM850 MINGW64 ~/utv/test/git-works (master)
+		$ git commit -m "footer merged with master"
+		[master 9894baf] footer merged with master
+		2 files changed, 7 insertions(+)
+		create mode 100644 footer.md
+
+		ae_netsense.no@ADEM850 MINGW64 ~/utv/test/git-works (master)
+		$ git log --oneline -n 12
+		9894baf (HEAD -> master) footer merged with master
+		6f1555e Merge branch 'header'
+		cdca57f (header) update-header
+		dcfa220 after-apply-stash-0
+		66ff3e3 apply-stash
+		d975538 after-stash
+		8fd9bc3 Revert "footer"
+		b00368b footer
+		43ca332 header 1 | header title added
+		00eb90e new-project
+		4d35ae8 my-new-commit-1
+		0628416 clean the page	
+
+
+		OZELLIKLE DIREK GIT MERGE  YAPMADAKI BIR SORUN DA SU..ORNEGIN HEADER BRANCHINI ILK MASTER UZERINDEN OLUSTURDUGJMMUZ ZAMAN MASTER BRANCHININ EN SON COMMMIT I HANGI SI ISE O COMMIT DEN SONRA HEADER BRANCHINDE CALISAN DEVELOPER HEADER DA CALISIRKEN ORNEGIN 20 tane commit yapmis ise biz direk merge yaptgimzda master ile header branchin merge yapinca header daki tum commit leri merge yaptiktan sonra master da gorecegiz artik iste bunlarin hepsini kendisi aktarmasin ben kendim en son commmiti yazayim ve sadece benim commitim gozuksun istersek o zaman merge islemini  git merge --squash footer bu sekilde  yapariz...
+
+		GIT-REBASE 
+		Git rebase ise git merge den farkli olarak sunu yapar, ornegin biz header ile master i birlestiriyoruz daha dogrusu header i master branchi uzerinde iken birlestirirken rebase ile yaparsak sanki master  uzerinde uygulanmis gibi gostererek commit tarihcesine birsey eklemiyor, yani bir merge  yaptgiini vs soylemiyor sanki ornegin biz header icerisindeki kodlari alip master branchina eklemis gibi normal master branchina eklenmis gibi, gosterir ki ornegin header uzerinde yapgimz commit leri de son loglarda master uzerinde goruruz...
+
+		commit 00eb90eab0d4610d67750ad96da4196cec2d3c16
+		Author: Adem Erbas <ae@netsense.no>
+		Date:   Thu Jun 29 13:50:45 2023 +0200
+
+			new-project
+
+		commit 4d35ae8605d2e1f5a73f22a197ad782139c17a82
+		Author: Adem Erbas <ae@netsense.no>
+
+		ae_netsense.no@ADEM850 MINGW64 ~/utv/test/git-works (master)
+		$ git log --oneline -n 12
+		aec84c3 (HEAD -> master, content) content-part
+		00eb90e new-project
+		4d35ae8 my-new-commit-1
+		0628416 clean the page
+		cffb436 Revert "git revert - commit-4"
+		fbaaa84 git revert - commit-4
+
+		GIT MERGE --ABORT 
+		BU KOMUT ILE MERGE ISLEMININ HEMEN ONCESINE GIDIYOR, DONUYOR....DIKKKAT EDELIM...COOOK ONEMLI!
+
+		SONRASINDA TEKRARDAN MERGE ETMEYE CALISABLIRIZ...
+
+
 	-->
 </body>
 </html>
