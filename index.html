@@ -632,7 +632,28 @@
 
 		SONRASINDA TEKRARDAN MERGE ETMEYE CALISABLIRIZ...
 
+		DAHA ONCE COMMIT ETTGIMZ COMMIT HASHLERIMZE ERISEREK ESKI COMMITLERIMZDEN IHTIYACMIZ 
+		OLANLAR ILE YENI BRANCHLAR OLUSTURABILIRIZ
 
+		git log --oneline -n 12
+
+		PS C:\Users\ae_netsense.no\utv\NSS-hyttetjenester> git log --oneline -n 12
+
+		be744bc53 
+		d7165ae05 report login                                                                                                          
+		b62ce3ad9 followup
+		57b3d0b1b followup
+		fa62de7ad Merge branch 
+		d4127bd99 Merge branch 
+		e9599c3b5 Merge branch 
+		78b818dc7 report login log default
+		2dc925991 Followup cases
+		c42e711ec Merge branch 
+
+		git branch report-login 00c500c07
+		Bu sekilde, 00c500c07 bu hash numarali, commit e report-login ismini vererek yeni bir branch olusturmus oluyoruz 
+		ve git branch diyerek branchlari gorebiliriz 
+		ARdindan da branchlar arasi git checkout report-loing ile switch yapabiliriz
 	-->
 </body>
 </html>
